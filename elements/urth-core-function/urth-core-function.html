@@ -6,6 +6,7 @@
 <link rel="import" href="../urth-core-behaviors/jupyter-widget-behavior.html">
 <link rel='import' href='../urth-core-behaviors/dynamic-properties-behavior.html'>
 <link rel="import" href="../urth-core-behaviors/execution-complete-behavior.html">
+<link rel="import" href="../urth-core-watch/watcher_behavior.html">
 
 <!--
 Creates a client side proxy to a function defined in the kernel. This function is specified by
@@ -149,7 +150,8 @@ Both examples are equivalent to invoking `aFunction(x=5, y=4)`
             behaviors: [
                 Urth.JupyterWidgetBehavior,
                 Urth.ExecutionCompleteBehavior,
-                Urth.DynamicPropertiesBehavior
+                Urth.DynamicPropertiesBehavior,
+                Urth.WatcherBehavior
             ],
 
             observers: [
@@ -467,6 +469,10 @@ Both examples are equivalent to invoking `aFunction(x=5, y=4)`
              */
             _computeReady: function(args, signature){
                 return this.isValid();
+            },
+
+            watcher_notify: function(){
+                this.invoke();
             }
     });
 })();

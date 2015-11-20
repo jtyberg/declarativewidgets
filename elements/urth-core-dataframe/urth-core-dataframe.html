@@ -5,6 +5,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../urth-core-behaviors/jupyter-widget-behavior.html">
 <link rel="import" href="../urth-core-behaviors/execution-complete-behavior.html">
+<link rel="import" href="../urth-core-watch/watcher_behavior.html">
 
 <!--
 Represents a widget that binds to a DataFrame variable. The DataFrame's
@@ -81,7 +82,11 @@ Example:
             }
         },
 
-        behaviors: [Urth.JupyterWidgetBehavior, Urth.ExecutionCompleteBehavior],
+        behaviors: [
+            Urth.JupyterWidgetBehavior,
+            Urth.ExecutionCompleteBehavior,
+            Urth.WatcherBehavior
+        ],
 
         created: function(){
             console.debug('urth-core-datafram created', arguments);
@@ -137,6 +142,10 @@ Example:
         _onLimitChange: function(){
             console.debug('urth-core-dataframe sending new limit value', this.limit);
             this.sync({limit: this.limit});
+            this.refresh();
+        },
+
+        watcher_notify: function(){
             this.refresh();
         }
 

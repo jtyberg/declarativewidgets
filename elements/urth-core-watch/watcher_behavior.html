@@ -1,0 +1,31 @@
+<!--
+# Copyright (c) Jupyter Development Team.
+# Distributed under the terms of the Modified BSD License.
+-->
+
+<!--
+This behavior is used by elements that can get notified when a watched variable changes
+-->
+<script>
+    'use strict';
+    (function() {
+        window.Urth = window.Urth || {};
+
+        /**
+         * Behavior needed for elements that want to be notified by urth-core-watch
+         *
+         * @group Urth Core
+         * @polymerBehavior Urth.WatcherBehavior
+         */
+        Urth.WatcherBehavior = {
+
+            created: function(){
+                //add class to indicate that it is a watcher
+                this.toggleClass("__watcher__");
+            },
+
+            watcher_notify: function(){}
+
+        };
+    })();
+</script>
